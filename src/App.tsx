@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react';
 import {
   ChakraProvider,
   Box,
@@ -7,9 +7,9 @@ import {
   VStack,
   Code,
   Grid,
-} from "@chakra-ui/react"
+} from '@chakra-ui/react';
 import theme from './theme';
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
+import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 export const App = () => (
   <ChakraProvider theme={theme}>
@@ -18,7 +18,11 @@ export const App = () => (
         <ColorModeSwitcher justifySelf="flex-end" />
         <VStack spacing={8}>
           <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
+            Edit
+            {' '}
+            <Code fontSize="xl">src/App.tsx</Code>
+            {' '}
+            and save to reload.
           </Text>
           <Link
             color="teal.500"
@@ -33,4 +37,4 @@ export const App = () => (
       </Grid>
     </Box>
   </ChakraProvider>
-)
+);
