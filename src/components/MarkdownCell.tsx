@@ -1,5 +1,6 @@
 import React, { useReducer, useRef } from "react";
-import { Box, useToken } from "@chakra-ui/react";
+import { useToken } from "@chakra-ui/system";
+import { Box } from "@chakra-ui/layout";
 
 import Markdown from "./Markdown";
 import Textarea from "./Textarea";

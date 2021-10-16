@@ -5,6 +5,7 @@
   "dependencies": {
     "@chakra-ui/layout": "^1.4.10",
     "@chakra-ui/react": "^1.0.0",
+    "@chakra-ui/system": "^1.7.4",
     "@chakra-ui/textarea": "^1.1.15",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
