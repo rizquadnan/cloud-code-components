@@ -11,6 +11,12 @@ export default {
   },
 } as ComponentMeta<typeof MarkdownCell>;
 
-const Template: ComponentStory<typeof MarkdownCell> = () => <MarkdownCell />;
+const Template: ComponentStory<typeof MarkdownCell> = (args) => (
+  <MarkdownCell {...args} />
+);
 
 export const Default = Template.bind({});
+Default.args = {
+  value: `# Read, *mode*.
+  **Double click me!**`,
+};

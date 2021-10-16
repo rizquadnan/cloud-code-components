@@ -1,7 +1,7 @@
 import React, { useReducer, useRef } from "react";
-// import ReactMarkdown from "react-markdown";
-// import Markdown from "./Markdown";
 import { Box, useToken } from "@chakra-ui/react";
+
+import Markdown from "./Markdown";
 import Textarea from "./Textarea";
 
 function stateReducer(
@@ -25,13 +25,20 @@ function stateReducer(
   }
 }
 
-const initialState: MarkdownState = {
-  mode: "read",
-  content: "",
-};
+export interface MarkdownCellProps {
+  value?: string;
+  // eslint-disable-next-line no-unused-vars
+  onChange?: (value: string) => void;
+}
 
-const MarkdownCell = () => {
-  const [state, dispatch] = useReducer(stateReducer, initialState);
+const MarkdownCell = (props: MarkdownCellProps) => {
+  const { value: propsValue, onChange: propsOnchange } = props;
+
+  const [state, dispatch] = useReducer(stateReducer, {
+    mode: "read",
+    content: propsValue ?? "",
+  });
+
   const ref = useRef<HTMLDivElement>(null);
   const [lightGrayColor] = useToken("colors", ["lightGray.default"]);
   const { mode, content } = state;
@@ -59,7 +66,13 @@ const MarkdownCell = () => {
   };
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch({ type: "input", payload: e.target.value });
+    const { value } = e.target;
+
+    dispatch({ type: "input", payload: value });
+
+    if (propsOnchange) {
+      propsOnchange(value);
+    }
   };
 
   return (
@@ -73,7 +86,7 @@ const MarkdownCell = () => {
       _focusVisible={{ outline: `${lightGrayColor} auto 1px` }}
     >
       {mode === "read" ? (
-        <div>Read mode</div>
+        <Markdown>{content}</Markdown>
       ) : (
         <Textarea value={content} onChange={onChange} />
       )}
