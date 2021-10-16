@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "jupyter-clone-ui"
+  },
+  "targets": {
+    "jupyter-clone-ui": {
+      "hosting": {
+        "storybook": [
+          "jupyter-clone-storybook"
+        ],
+        "app": [
+          "jupyter-clone-ui"
+        ]
+      }
+    }
+  }
+}
