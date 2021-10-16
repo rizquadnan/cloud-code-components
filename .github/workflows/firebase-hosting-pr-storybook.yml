@@ -3,12 +3,13 @@
 
 name: Deploy to Firebase Hosting on PR
 'on':
-  push:
+  pull-request:
     branches:
-    - 'storybook/*'
+    - main
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
+    if: startsWith(github.head_ref, 'storybook/') == true
     steps:
       - uses: actions/checkout@v2
       - run: 'yarn && yarn build:storybook'
