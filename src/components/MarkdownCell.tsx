@@ -12,6 +12,7 @@ function stateReducer(
   switch (action.type) {
     case "doubleClick":
       if (state.mode !== "read") return state;
+
       return { ...state, mode: "edit" };
     case "enterKeyPress":
       if (state.mode !== "read") return state;
