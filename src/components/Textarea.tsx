@@ -13,7 +13,7 @@ function Textarea(props: TextareaProps) {
       overflow="hidden"
       w="100%"
       resize="none"
-      minRow={1}
+      minrow={1}
       transition="height none"
       {...props}
     />

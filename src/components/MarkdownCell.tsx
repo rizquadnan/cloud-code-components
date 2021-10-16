@@ -2,6 +2,7 @@ import React, { useReducer, useRef } from "react";
 // import ReactMarkdown from "react-markdown";
 // import Markdown from "./Markdown";
 import { Box, useToken } from "@chakra-ui/react";
+import Textarea from "./Textarea";
 
 function stateReducer(
   state: MarkdownState,
@@ -10,7 +11,6 @@ function stateReducer(
   switch (action.type) {
     case "doubleClick":
       if (state.mode !== "read") return state;
-
       return { ...state, mode: "edit" };
     case "enterKeyPress":
       if (state.mode !== "read") return state;
@@ -18,6 +18,8 @@ function stateReducer(
       return { ...state, mode: "edit" };
     case "enterCtrlKeyPress":
       return { ...state, mode: "read" };
+    case "input":
+      return { ...state, content: action.payload ?? "" };
     default:
       return state;
   }
@@ -32,7 +34,7 @@ const MarkdownCell = () => {
   const [state, dispatch] = useReducer(stateReducer, initialState);
   const ref = useRef<HTMLDivElement>(null);
   const [lightGrayColor] = useToken("colors", ["lightGray.default"]);
-  const { mode } = state;
+  const { mode, content } = state;
 
   const onKeyPress = (e: React.KeyboardEvent) => {
     const { ctrlKey, key } = e;
@@ -44,7 +46,7 @@ const MarkdownCell = () => {
       return;
     }
 
-    if (key === "Enter") {
+    if (mode === "read" && key === "Enter") {
       ref.current?.focus();
 
       dispatch({ type: "enterKeyPress" });
@@ -56,6 +58,10 @@ const MarkdownCell = () => {
     dispatch({ type: "doubleClick" });
   };
 
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch({ type: "input", payload: e.target.value });
+  };
+
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <Box
@@ -65,9 +71,12 @@ const MarkdownCell = () => {
       role="button"
       tabIndex={0}
       _focusVisible={{ outline: `${lightGrayColor} auto 1px` }}
-      outline={state.mode === "edit" ? `${lightGrayColor} auto 1px` : undefined}
     >
-      {mode === "read" ? <div>Read mode</div> : <div>Edit mode</div>}
+      {mode === "read" ? (
+        <div>Read mode</div>
+      ) : (
+        <Textarea value={content} onChange={onChange} />
+      )}
     </Box>
   );
 };
@@ -79,7 +88,7 @@ export interface MarkdownState {
 
 export interface MarkdownAction {
   type: string;
-  payload?: Partial<MarkdownState>;
+  payload?: string;
 }
 
 export default MarkdownCell;
