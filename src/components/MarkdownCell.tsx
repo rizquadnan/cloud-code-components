@@ -1,7 +1,9 @@
 import React, { useReducer, useRef } from "react";
-// import ReactMarkdown from "react-markdown";
-// import Markdown from "./Markdown";
-import { Box, useToken } from "@chakra-ui/react";
+import { useToken } from "@chakra-ui/system";
+import { Box } from "@chakra-ui/layout";
+
+import Markdown from "./Markdown";
+import Textarea from "./Textarea";
 
 function stateReducer(
   state: MarkdownState,
@@ -18,21 +20,30 @@ function stateReducer(
       return { ...state, mode: "edit" };
     case "enterCtrlKeyPress":
       return { ...state, mode: "read" };
+    case "input":
+      return { ...state, content: action.payload ?? "" };
     default:
       return state;
   }
 }
 
-const initialState: MarkdownState = {
-  mode: "read",
-  content: "",
-};
+export interface MarkdownCellProps {
+  value?: string;
+  // eslint-disable-next-line no-unused-vars
+  onChange?: (value: string) => void;
+}
 
-const MarkdownCell = () => {
-  const [state, dispatch] = useReducer(stateReducer, initialState);
+const MarkdownCell = (props: MarkdownCellProps) => {
+  const { value: propsValue, onChange: propsOnchange } = props;
+
+  const [state, dispatch] = useReducer(stateReducer, {
+    mode: "read",
+    content: propsValue ?? "",
+  });
+
   const ref = useRef<HTMLDivElement>(null);
   const [lightGrayColor] = useToken("colors", ["lightGray.default"]);
-  const { mode } = state;
+  const { mode, content } = state;
 
   const onKeyPress = (e: React.KeyboardEvent) => {
     const { ctrlKey, key } = e;
@@ -44,7 +55,7 @@ const MarkdownCell = () => {
       return;
     }
 
-    if (key === "Enter") {
+    if (mode === "read" && key === "Enter") {
       ref.current?.focus();
 
       dispatch({ type: "enterKeyPress" });
@@ -56,6 +67,16 @@ const MarkdownCell = () => {
     dispatch({ type: "doubleClick" });
   };
 
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+
+    dispatch({ type: "input", payload: value });
+
+    if (propsOnchange) {
+      propsOnchange(value);
+    }
+  };
+
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <Box
@@ -65,9 +86,12 @@ const MarkdownCell = () => {
       role="button"
       tabIndex={0}
       _focusVisible={{ outline: `${lightGrayColor} auto 1px` }}
-      outline={state.mode === "edit" ? `${lightGrayColor} auto 1px` : undefined}
     >
-      {mode === "read" ? <div>Read mode</div> : <div>Edit mode</div>}
+      {mode === "read" ? (
+        <Markdown>{content}</Markdown>
+      ) : (
+        <Textarea value={content} onChange={onChange} />
+      )}
     </Box>
   );
 };
@@ -79,7 +103,7 @@ export interface MarkdownState {
 
 export interface MarkdownAction {
   type: string;
-  payload?: Partial<MarkdownState>;
+  payload?: string;
 }
 
 export default MarkdownCell;

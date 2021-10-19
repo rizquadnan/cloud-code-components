@@ -11,6 +11,15 @@ export default {
   },
 } as ComponentMeta<typeof MarkdownCell>;
 
-const Template: ComponentStory<typeof MarkdownCell> = () => <MarkdownCell />;
+const Template: ComponentStory<typeof MarkdownCell> = (args) => (
+  <MarkdownCell {...args} />
+);
 
 export const Default = Template.bind({});
+Default.args = {
+  value: `# Read, *mode*. Here's what you can do:
+  - Double click to enter edit mode
+  - \`ctrl\` key + \`enter\` key to execute cell and render markdown in read mode
+  ---
+  Read [here](https://duckduckgo.com) for markdown basics`,
+};
