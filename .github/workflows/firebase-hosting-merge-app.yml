@@ -23,8 +23,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JUPYTER_CLONE_UI }}'
-          channelId: live
-          projectId: jupyter-clone-ui
+      with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JUPYTER_CLONE_UI }}'
+        projectId: jupyter-clone-ui
+        channelId: live
