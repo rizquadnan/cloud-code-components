@@ -17,5 +17,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JUPYTER_CLONE_UI }}'
           channelId: live
-          projectId: jupyter-clone-storyboo
+          projectId: jupyter-clone-storybook
           target: storybook
