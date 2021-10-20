@@ -1,6 +1,8 @@
 const path = require("path");
 const toPath = (_path) => path.join(process.cwd(), _path);
 
+const supportedLanguages = require("../src/config/CodeEditorSupportedLanguages.js");
+
 module.exports = {
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -8,6 +10,17 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/preset-create-react-app",
   ],
+  babel: async (options) => ({
+    ...options,
+    "plugins": [
+      ...options.plugins,
+      ["prismjs", {
+          "languages": supportedLanguages,
+          "theme": "twilight",
+          "css": true
+      }]
+    ]
+  }),
   webpackFinal: async (config) => {
     return {
       ...config,

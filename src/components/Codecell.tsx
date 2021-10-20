@@ -1,28 +1,24 @@
 import React, { useState } from "react";
-import Editor from "react-simple-code-editor";
-import { highlight, languages } from "prismjs";
-import "prismjs/themes/prism.css";
+import CodeEditor from "./CodeEditor";
 
-const initialCode = `function add(a, b) {
-  return a + b;
-}
-`;
-
-function Codecell() {
-  const [code, setCode] = useState(initialCode);
+function Codecell(props: CodeCellProps) {
+  const { language = "go", initialValue = "", placeholder } = props;
+  const [code, setCode] = useState(initialValue);
 
   return (
-    <Editor
+    <CodeEditor
       value={code}
+      placeholder={placeholder}
       onValueChange={(value) => setCode(value)}
-      highlight={(value) => highlight(value, languages.js, "javascript")}
-      padding={10}
-      style={{
-        fontFamily: '"Fira code", "Fira Mono", monospace',
-        fontSize: 12,
-      }}
+      language={language}
     />
   );
+}
+
+export interface CodeCellProps {
+  language: string;
+  initialValue?: string;
+  placeholder?: string;
 }
 
 export default Codecell;
