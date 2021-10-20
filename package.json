@@ -7,6 +7,7 @@
     "@chakra-ui/react": "^1.6.10",
     "@chakra-ui/system": "^1.7.4",
     "@chakra-ui/textarea": "^1.1.15",
+    "@craco/craco": "^6.3.0",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
     "@storybook/addon-actions": "^6.3.10",
@@ -49,12 +50,12 @@
     "web-vitals": "^0.2.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "craco start",
     "start:storybook": "start-storybook -p 6006 -s public",
-    "build": "react-scripts build",
+    "build": "craco build",
     "build:storybook": "build-storybook -s public",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "test": "craco test",
+    "eject": "craco eject",
     "lint:tsx": "yarn eslint src/**/*.tsx --fix && yarn prettier src/**/*.tsx -w",
     "lint:ts": "yarn eslint src/**/*.ts --fix && yarn prettier src/**/*.ts -w"
   },
