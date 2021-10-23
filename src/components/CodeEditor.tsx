@@ -4,9 +4,10 @@ import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs";
 import "prismjs/themes/prism.css";
 
+import { Box } from "@chakra-ui/layout";
 import supportedLanguages from "../config/CodeEditorSupportedLanguages.js";
 
-function CodeEditor(props: CodeEditorProps) {
+const CodeEditor = (props: CodeEditorProps) => {
   const { language, fontSize = 12, ...otherProps } = props;
 
   if (!supportedLanguages.includes(language)) {
@@ -15,18 +16,35 @@ function CodeEditor(props: CodeEditorProps) {
 
   return (
     <Editor
-      className="line-numbers"
-      padding={10}
+      padding={16}
       style={{
         fontFamily: "monospace",
         fontSize,
       }}
-      {...props}
+      {...otherProps}
       highlight={(value) => highlight(value, languages[language], language)}
     />
   );
-}
+};
 
+function CodeEditorStyled(props: CodeEditorProps) {
+  return (
+    <Box
+      as={CodeEditor}
+      textareaClassName="adnan-text"
+      borderColor="gray.200"
+      borderRadius="md"
+      sx={{
+        ".adnan-text": {
+          border: "1px solid !important",
+          borderColor: "inherit !important",
+          borderRadius: "inherit",
+        },
+      }}
+      {...props}
+    />
+  );
+}
 interface EditorProps {
   // Props for the component
   value: string;
@@ -66,4 +84,4 @@ interface EditorProps {
 
 export interface CodeEditorProps extends EditorProps {}
 
-export default CodeEditor;
+export default CodeEditorStyled;
