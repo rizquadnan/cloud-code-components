@@ -1,5 +1,4 @@
 import React, { useReducer, useRef } from "react";
-import { useToken } from "@chakra-ui/system";
 import { Box } from "@chakra-ui/layout";
 
 import Markdown from "./Markdown";
@@ -42,7 +41,6 @@ const MarkdownCell = (props: MarkdownCellProps) => {
   });
 
   const ref = useRef<HTMLDivElement>(null);
-  const [lightGrayColor] = useToken("colors", ["lightGray.default"]);
   const { mode, content } = state;
 
   const onKeyPress = (e: React.KeyboardEvent) => {
@@ -85,7 +83,6 @@ const MarkdownCell = (props: MarkdownCellProps) => {
       onKeyPress={onKeyPress}
       role="button"
       tabIndex={0}
-      _focusVisible={{ outline: `${lightGrayColor} auto 1px` }}
     >
       {mode === "read" ? (
         <Markdown>{content}</Markdown>
