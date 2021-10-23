@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs";
@@ -8,7 +7,8 @@ import { Box } from "@chakra-ui/layout";
 import supportedLanguages from "../config/CodeEditorSupportedLanguages.js";
 
 const CodeEditor = (props: CodeEditorProps) => {
-  const { language, fontSize = 12, ...otherProps } = props;
+  const { language, fontSize = 12, onCtrlEnter, ...otherProps } = props;
+  const editor = React.useRef(null);
 
   if (!supportedLanguages.includes(language)) {
     return <div>Language Not Supported</div>;
@@ -16,6 +16,13 @@ const CodeEditor = (props: CodeEditorProps) => {
 
   return (
     <Editor
+      ref={editor}
+      onKeyDown={(e) => {
+        if (e.ctrlKey && e.key === "Enter" && onCtrlEnter) {
+          (e.target as HTMLElement).blur();
+          onCtrlEnter();
+        }
+      }}
       padding={16}
       style={{
         fontFamily: "monospace",
@@ -27,7 +34,9 @@ const CodeEditor = (props: CodeEditorProps) => {
   );
 };
 
-function CodeEditorStyled(props: CodeEditorProps) {
+function CodeEditorWrapper(props: CodeEditorProps) {
+  const { ...otherProps } = props;
+
   return (
     <Box
       as={CodeEditor}
@@ -41,13 +50,14 @@ function CodeEditorStyled(props: CodeEditorProps) {
           borderRadius: "inherit",
         },
       }}
-      {...props}
+      {...otherProps}
     />
   );
 }
 interface EditorProps {
   // Props for the component
   value: string;
+  // eslint-disable-next-line no-unused-vars
   onValueChange: (value: string) => void;
   language: string;
   fontSize?: string;
@@ -70,18 +80,25 @@ interface EditorProps {
   readOnly?: boolean;
   required?: boolean;
   onClick?: React.MouseEventHandler<HTMLDivElement> &
+    // eslint-disable-next-line no-unused-vars
     ((e: React.MouseEvent<HTMLTextAreaElement, MouseEvent>) => void);
   onFocus?: React.FocusEventHandler<HTMLDivElement> &
+    // eslint-disable-next-line no-unused-vars
     ((e: React.FormEvent<HTMLTextAreaElement>) => void);
   onBlur?: React.FocusEventHandler<HTMLDivElement> &
+    // eslint-disable-next-line no-unused-vars
     ((e: React.FocusEvent<HTMLTextAreaElement, Element>) => void);
   onKeyUp?: React.KeyboardEventHandler<HTMLDivElement> &
+    // eslint-disable-next-line no-unused-vars
     ((e: React.KeyboardEvent<HTMLTextAreaElement>) => void);
   onKeyDown?: React.KeyboardEventHandler<HTMLDivElement> &
+    // eslint-disable-next-line no-unused-vars
     ((e: React.KeyboardEvent<HTMLTextAreaElement>) => void);
   preClassName?: string;
 }
 
-export interface CodeEditorProps extends EditorProps {}
+export interface CodeEditorProps extends EditorProps {
+  onCtrlEnter?: () => void;
+}
 
-export default CodeEditorStyled;
+export default CodeEditorWrapper;

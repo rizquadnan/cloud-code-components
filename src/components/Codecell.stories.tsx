@@ -13,13 +13,17 @@ export default {
 } as ComponentMeta<typeof Codecell>;
 
 const Template: ComponentStory<typeof Codecell> = (args) => (
-  <Codecell {...args} />
+  <Codecell
+    {...args}
+    // eslint-disable-next-line no-console
+    onRunCode={(value) => console.log("CODE CELL RUN CODE: ", value)}
+  />
 );
 
 export const Default = Template.bind({});
 Default.args = {
   language: "go",
-  placeholder: "This is code cell. Type here",
+  placeholder: `This is code cell. Type here. Ctrl + Enter to run code`,
 };
 
 export const WithInitialValue = Template.bind({});
