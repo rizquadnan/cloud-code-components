@@ -16,18 +16,25 @@ const Template: ComponentStory<typeof Codecell> = (args) => (
   <Codecell
     {...args}
     // eslint-disable-next-line no-console
+    language="go"
     onRunCode={(value) => console.log("CODE CELL RUN CODE: ", value)}
+    placeholder="This is code cell. Type here. Ctrl + Enter to run code"
   />
 );
 
 export const Default = Template.bind({});
-Default.args = {
-  language: "go",
-  placeholder: `This is code cell. Type here. Ctrl + Enter to run code`,
+
+export const WithNumber = Template.bind({});
+WithNumber.args = {
+  number: 1,
 };
 
 export const WithInitialValue = Template.bind({});
 WithInitialValue.args = {
   initialValue: CodeEditorStory.args?.value ?? "",
-  language: "go",
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  isLoading: true,
 };
