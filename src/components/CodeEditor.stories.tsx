@@ -42,10 +42,64 @@ func main() {
   language: "go",
 };
 
-export const AnotherLanguage = Template.bind({});
-AnotherLanguage.args = {
+export const Javascript = Template.bind({});
+Javascript.args = {
   value: `const javascriptFunction = (a, b) => {
       return a + b;
 }`,
   language: "javascript",
+};
+
+export const Java = Template.bind({});
+Java.args = {
+  value: `import java.util.Scanner;
+
+public class Life {
+
+    @Override @Bind("One")
+    public void show(boolean[][] grid){
+        String s = "";
+        for(boolean[] row : grid){
+            for(boolean val : row)
+                if(val)
+                    s += "*";
+                else
+                    s += ".";
+            s += "\n";
+        }
+        System.out.println(s);
+    }
+
+    public static boolean[][] gen(){
+        boolean[][] grid = new boolean[10][10];
+        for(int r = 0; r < 10; r++)
+            for(int c = 0; c < 10; c++)
+                if( Math.random() > 0.7 )
+                    grid[r][c] = true;
+        return grid;
+    }
+
+    public static void main(String[] args){
+        boolean[][] world = gen();
+        show(world);
+        System.out.println();
+        world = nextGen(world);
+        show(world);
+        Scanner s = new Scanner(System.in);
+        while(s.nextLine().length() == 0){
+            System.out.println();
+            world = nextGen(world);
+            show(world);
+
+        }
+    }
+
+	// [...]
+}`,
+  language: `java`,
+};
+
+export const NotSupported = Template.bind({});
+NotSupported.args = {
+  language: "reasonml",
 };
