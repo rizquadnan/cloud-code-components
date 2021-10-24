@@ -1,1 +1,1 @@
-module.exports = ["go", "javascript"];
+module.exports = ["go", "javascript", "python", "java"];

@@ -6,11 +6,12 @@ import CodeEditor from "./CodeEditor";
 function Codecell(props: CodeCellProps) {
   const {
     language = "go",
-    initialValue = "",
-    placeholder,
-    onRunCode,
     isLoading,
     number,
+    initialValue = "",
+    placeholder,
+    result,
+    onRunCode,
   } = props;
   const [code, setCode] = useState(initialValue);
 
@@ -35,6 +36,16 @@ function Codecell(props: CodeCellProps) {
             onCtrlEnter={() => onRunCode(code)}
             language={language}
           />
+          {result && (
+            <Box marginTop={-1}>
+              <CodeEditor
+                value={result}
+                language={language}
+                readOnly
+                hasBorder={false}
+              />
+            </Box>
+          )}
         </Skeleton>
       </Box>
     </Flex>
@@ -42,13 +53,14 @@ function Codecell(props: CodeCellProps) {
 }
 
 export interface CodeCellProps {
-  // eslint-disable-next-line no-unused-vars
-  onRunCode: (value: string) => void;
   language: string;
   isLoading?: boolean;
   number?: number;
   initialValue?: string;
   placeholder?: string;
+  result?: string;
+  // eslint-disable-next-line no-unused-vars
+  onRunCode: (value: string) => void;
 }
 
 export default Codecell;

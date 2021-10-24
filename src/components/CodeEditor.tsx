@@ -7,7 +7,13 @@ import { Box } from "@chakra-ui/layout";
 import supportedLanguages from "../config/CodeEditorSupportedLanguages.js";
 
 const CodeEditor = (props: CodeEditorProps) => {
-  const { language, fontSize = 12, onCtrlEnter, ...otherProps } = props;
+  const {
+    language,
+    fontSize = 12,
+    onCtrlEnter,
+    onValueChange,
+    ...otherProps
+  } = props;
   const editor = React.useRef(null);
 
   if (!supportedLanguages.includes(language)) {
@@ -29,13 +35,14 @@ const CodeEditor = (props: CodeEditorProps) => {
         fontSize,
       }}
       {...otherProps}
+      onValueChange={onValueChange ?? (() => undefined)}
       highlight={(value) => highlight(value, languages[language], language)}
     />
   );
 };
 
 function CodeEditorWrapper(props: CodeEditorProps) {
-  const { ...otherProps } = props;
+  const { hasBorder = true, ...otherProps } = props;
 
   return (
     <Box
@@ -45,7 +52,8 @@ function CodeEditorWrapper(props: CodeEditorProps) {
       borderRadius="md"
       sx={{
         ".adnan-text": {
-          border: "1px solid !important",
+          border: hasBorder ? "1px solid !important" : "none !important",
+          outline: otherProps.readOnly ? "none !important" : undefined,
           borderColor: "inherit !important",
           borderRadius: "inherit",
         },
@@ -57,8 +65,6 @@ function CodeEditorWrapper(props: CodeEditorProps) {
 interface EditorProps {
   // Props for the component
   value: string;
-  // eslint-disable-next-line no-unused-vars
-  onValueChange: (value: string) => void;
   language: string;
   fontSize?: string;
   tabSize?: number;
@@ -98,7 +104,10 @@ interface EditorProps {
 }
 
 export interface CodeEditorProps extends EditorProps {
+  // eslint-disable-next-line no-unused-vars
+  onValueChange?: (value: string) => void;
   onCtrlEnter?: () => void;
+  hasBorder?: boolean;
 }
 
 export default CodeEditorWrapper;

@@ -38,3 +38,22 @@ export const Loading = Template.bind({});
 Loading.args = {
   isLoading: true,
 };
+
+export const WithResult = Template.bind({});
+WithResult.args = {
+  initialValue: `print("Hi")`,
+  result: "Hi",
+  number: 1,
+};
+
+export const WithError = Template.bind({});
+WithError.args = {
+  initialValue: `prin("Hi")`,
+  result: `---------------------------------------------------------------------------
+  NameError                                 Traceback (most recent call last)
+  <ipython-input-1-4c2e160dfadf> in <module>
+  ----> 1 prin("Hi")
+  
+  NameError: name 'prin' is not defined`,
+  number: 1,
+};
