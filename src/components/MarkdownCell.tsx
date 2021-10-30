@@ -1,5 +1,6 @@
 import React, { useReducer, useRef } from "react";
 import { Box } from "@chakra-ui/layout";
+import { Skeleton } from "@chakra-ui/skeleton";
 
 import Markdown from "./Markdown";
 import Textarea from "./Textarea";
@@ -30,14 +31,15 @@ export interface MarkdownCellProps {
   value?: string;
   // eslint-disable-next-line no-unused-vars
   onChange?: (value: string) => void;
+  isLoading?: boolean;
 }
 
 const MarkdownCell = (props: MarkdownCellProps) => {
-  const { value: propsValue, onChange: propsOnchange } = props;
+  const { value: propsValue, onChange: propsOnchange, isLoading } = props;
 
   const [state, dispatch] = useReducer(stateReducer, {
     mode: "read",
-    content: propsValue ?? "",
+    content: propsValue ?? "Double click here to create markdown",
   });
 
   const ref = useRef<HTMLDivElement>(null);
@@ -75,21 +77,25 @@ const MarkdownCell = (props: MarkdownCellProps) => {
     }
   };
 
+  const displaySkeleton = !isLoading;
+
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <Box
-      ref={ref}
-      onDoubleClick={onDoubleClick}
-      onKeyPress={onKeyPress}
-      role="button"
-      tabIndex={0}
-    >
-      {mode === "read" ? (
-        <Markdown>{content}</Markdown>
-      ) : (
-        <Textarea value={content} onChange={onChange} />
-      )}
-    </Box>
+    <Skeleton isLoaded={displaySkeleton}>
+      <Box
+        ref={ref}
+        onDoubleClick={onDoubleClick}
+        onKeyPress={onKeyPress}
+        role="button"
+        tabIndex={0}
+      >
+        {mode === "read" ? (
+          <Markdown>{content}</Markdown>
+        ) : (
+          <Textarea value={content} onChange={onChange} />
+        )}
+      </Box>
+    </Skeleton>
   );
 };
 
