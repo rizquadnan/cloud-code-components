@@ -1,5 +1,5 @@
 import { Flex, Box, Text } from "@chakra-ui/layout";
-import { Skeleton } from "@chakra-ui/react";
+import { Skeleton } from "@chakra-ui/skeleton";
 import React, { useState } from "react";
 import CodeEditor from "./CodeEditor";
 
