@@ -1709,7 +1709,7 @@
     "@chakra-ui/form-control" "1.4.2"
     "@chakra-ui/utils" "1.8.3"
 
-"@chakra-ui/skeleton@1.1.19":
+"@chakra-ui/skeleton@1.1.19", "@chakra-ui/skeleton@^1.1.19":
   version "1.1.19"
   resolved "https://registry.yarnpkg.com/@chakra-ui/skeleton/-/skeleton-1.1.19.tgz#c1c36f3b90de03d864350cfc53a0e8cf5dede353"
   integrity sha512-+JoJxs28PirYmTAaPKabEPcVUWKjFqVvmN8ygK+p3poZQ6J4csCWv7DHbh2dHcvTXJFckuGqmQYFcflW11OoPg==

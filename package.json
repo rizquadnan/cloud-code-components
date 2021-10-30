@@ -5,6 +5,7 @@
   "dependencies": {
     "@chakra-ui/layout": "^1.4.10",
     "@chakra-ui/react": "^1.6.10",
+    "@chakra-ui/skeleton": "^1.1.19",
     "@chakra-ui/system": "^1.7.4",
     "@chakra-ui/textarea": "^1.1.15",
     "@craco/craco": "^6.3.0",

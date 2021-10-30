@@ -16,10 +16,17 @@ const Template: ComponentStory<typeof MarkdownCell> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {
+
+export const WithValue = Template.bind({});
+WithValue.args = {
   value: `# Read, *mode*. Here's what you can do:
   - Double click to enter edit mode
   - \`ctrl\` key + \`enter\` key to execute cell and render markdown in read mode
   ---
   Read [here](https://duckduckgo.com) for markdown basics`,
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  isLoading: true,
 };
