@@ -1,5 +1,6 @@
 import React from "react"
-import { ChakraProvider } from '@chakra-ui/react'
+import { CSSReset } from "@chakra-ui/css-reset";
+import { ChakraProvider } from "@chakra-ui/provider";
 import theme from '../src/theme'
 
 export const parameters = {
@@ -15,6 +16,7 @@ export const parameters = {
 const withChakra = (StoryFn) => {
   return (
     <ChakraProvider theme={theme}>
+      <CSSReset />
       <StoryFn />
     </ChakraProvider>
   )

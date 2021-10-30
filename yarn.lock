@@ -1405,7 +1405,7 @@
     "@chakra-ui/icon" "1.1.12"
     "@chakra-ui/utils" "1.8.3"
 
-"@chakra-ui/color-mode@1.1.13":
+"@chakra-ui/color-mode@1.1.13", "@chakra-ui/color-mode@^1.1.13":
   version "1.1.13"
   resolved "https://registry.yarnpkg.com/@chakra-ui/color-mode/-/color-mode-1.1.13.tgz#aacc2c113d370bd04715d9225ae02064c5f392b3"
   integrity sha512-IYCOfeP+5a/OFmixNN2nkcZIRwC7qNb26I7zqZ/hEQYr4gZi7FKEthKjpvZWKCwLRSNiidhkaPLzAf+lhqM/Qg==
@@ -1428,7 +1428,7 @@
     "@chakra-ui/hooks" "1.6.1"
     "@chakra-ui/utils" "1.8.3"
 
-"@chakra-ui/css-reset@1.0.0":
+"@chakra-ui/css-reset@1.0.0", "@chakra-ui/css-reset@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@chakra-ui/css-reset/-/css-reset-1.0.0.tgz#8395921b35ef27bee0579a4d730c5ab7f7b39734"
   integrity sha512-UaPsImGHvCgFO3ayp6Ugafu2/3/EG8wlW/8Y9Ihfk1UFv8cpV+3BfWKmuZ7IcmxcBL9dkP6E8p3/M1T0FB92hg==
@@ -1611,7 +1611,7 @@
     "@chakra-ui/theme-tools" "1.2.2"
     "@chakra-ui/utils" "1.8.3"
 
-"@chakra-ui/provider@1.6.9":
+"@chakra-ui/provider@1.6.9", "@chakra-ui/provider@^1.6.9":
   version "1.6.9"
   resolved "https://registry.yarnpkg.com/@chakra-ui/provider/-/provider-1.6.9.tgz#9befa3b5b4c4f650237bc00d773c1278e8329efc"
   integrity sha512-NS60y6AYTjngk+tNuNCvgJUo5VVSJeyzmm+3Ujvl3nKwHnsUrwvvug5XhPrZI3b3K9910BG6xk0+ptWqaHCWvQ==
