@@ -4,8 +4,11 @@ import {
   TextareaProps as ChakraTextareaProps,
 } from "@chakra-ui/textarea";
 import ResizeTextarea from "react-textarea-autosize";
+import { useToken } from "@chakra-ui/system";
 
 function Textarea(props: TextareaProps) {
+  const [blue600] = useToken("colors", ["blue.600"]);
+
   return (
     <ChakraTextarea
       as={ResizeTextarea}
@@ -15,6 +18,11 @@ function Textarea(props: TextareaProps) {
       resize="none"
       minrow={1}
       transition="height none"
+      _focus={{
+        zIndex: 1,
+        borderColor: `${blue600}`,
+        boxShadow: `0 0 0 1px ${blue600}`,
+      }}
       {...props}
     />
   );

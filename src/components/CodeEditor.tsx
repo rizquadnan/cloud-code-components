@@ -4,6 +4,7 @@ import { highlight, languages } from "prismjs";
 import "prismjs/themes/prism.css";
 
 import { Box } from "@chakra-ui/layout";
+import { useToken } from "@chakra-ui/system";
 import supportedLanguages from "../config/CodeEditorSupportedLanguages.js";
 
 const CodeEditor = (props: CodeEditorProps) => {
@@ -43,19 +44,23 @@ const CodeEditor = (props: CodeEditorProps) => {
 
 function CodeEditorWrapper(props: CodeEditorProps) {
   const { hasBorder = true, ...otherProps } = props;
+  const [blue600] = useToken("colors", ["blue.600"]);
 
   return (
     <Box
       as={CodeEditor}
-      textareaClassName="adnan-text"
+      textareaClassName="code-editor-text-area"
       borderColor="gray.200"
       borderRadius="md"
       sx={{
-        ".adnan-text": {
+        ".code-editor-text-area": {
           border: hasBorder ? "1px solid !important" : "none !important",
           outline: otherProps.readOnly ? "none !important" : undefined,
           borderColor: "inherit !important",
           borderRadius: "inherit",
+        },
+        ".code-editor-text-area:focus-visible": {
+          outline: `${blue600} auto 1px !important`,
         },
       }}
       {...otherProps}
