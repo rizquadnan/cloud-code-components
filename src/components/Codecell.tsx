@@ -1,5 +1,6 @@
 import { Flex, Box, Text } from "@chakra-ui/layout";
 import { Skeleton } from "@chakra-ui/skeleton";
+import { useTheme } from "@chakra-ui/system";
 import React, { useState } from "react";
 import CodeEditor from "./CodeEditor";
 
@@ -14,13 +15,14 @@ function Codecell(props: CodeCellProps) {
     onRunCode,
   } = props;
   const [code, setCode] = useState(initialValue);
+  const { notebookCellLeftPadding } = useTheme();
 
   const displayedNumber = number ?? " ";
   const displaySkeleton = !isLoading;
 
   return (
     <Flex>
-      <Box marginRight="4" marginTop="1">
+      <Box marginTop="1" width={notebookCellLeftPadding}>
         <Skeleton isLoaded={displaySkeleton}>
           <Text fontFamily="monospace" color="blue.600">
             In [{displayedNumber}]:{" "}

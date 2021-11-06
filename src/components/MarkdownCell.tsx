@@ -2,6 +2,7 @@ import React, { useReducer, useRef } from "react";
 import { Box } from "@chakra-ui/layout";
 import { Skeleton } from "@chakra-ui/skeleton";
 
+import { useTheme } from "@chakra-ui/system";
 import Markdown from "./Markdown";
 import Textarea from "./Textarea";
 
@@ -41,6 +42,8 @@ const MarkdownCell = (props: MarkdownCellProps) => {
     mode: "read",
     content: propsValue ?? "Double click here to create markdown",
   });
+
+  const { notebookCellLeftPadding } = useTheme();
 
   const ref = useRef<HTMLDivElement>(null);
   const { mode, content } = state;
@@ -88,6 +91,7 @@ const MarkdownCell = (props: MarkdownCellProps) => {
         onKeyPress={onKeyPress}
         role="button"
         tabIndex={0}
+        paddingLeft={notebookCellLeftPadding}
       >
         {mode === "read" ? (
           <Markdown>{content}</Markdown>
