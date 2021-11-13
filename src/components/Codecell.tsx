@@ -63,6 +63,7 @@ export interface CodeCellProps {
   result?: string;
   // eslint-disable-next-line no-unused-vars
   onRunCode: (value: string) => void;
+  // eslint-disable-next-line no-unused-vars
 }
 
 export default Codecell;
