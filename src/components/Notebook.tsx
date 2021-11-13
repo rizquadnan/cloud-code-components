@@ -5,23 +5,37 @@ import Codecell from "./Codecell";
 import MarkdownCell from "./MarkdownCell";
 import defaultLanguage from "../config/CodeEditorDefaultLanguage.js";
 
-function Notebook({ cellList, language, onRunCodeCell }: NotebookProps) {
+function Notebook({
+  cellList,
+  language,
+  onRunCodeCell,
+  onChange,
+}: NotebookProps) {
   const resolvedLanguage = language ?? defaultLanguage;
 
   return (
     <Box>
-      {cellList.map((cell) => (
-        <CellWrapper key={cell.key}>
-          {cell.type === "code" ? (
-            <Codecell
-              language={resolvedLanguage}
-              onRunCode={(value) => onRunCodeCell(cell.key, value)}
-            />
-          ) : (
-            <MarkdownCell />
-          )}
-        </CellWrapper>
-      ))}
+      {cellList.map(
+        ({ key, type, value: propsValue, runOrder, resultValue }) => (
+          <CellWrapper key={key}>
+            {type === "code" ? (
+              <Codecell
+                initialValue={propsValue}
+                number={runOrder}
+                result={resultValue}
+                language={resolvedLanguage}
+                onChange={(value) => onChange(key, value)}
+                onRunCode={(value) => onRunCodeCell(key, value)}
+              />
+            ) : (
+              <MarkdownCell
+                initialValue={propsValue}
+                onChange={(value) => onChange(key, value)}
+              />
+            )}
+          </CellWrapper>
+        )
+      )}
     </Box>
   );
 }
@@ -31,11 +45,15 @@ export interface NotebookProps {
   language?: string;
   // eslint-disable-next-line no-unused-vars
   onRunCodeCell: (key: string, value: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  onChange: (key: string, value: string) => void;
 }
 
 export interface NotebookCell {
   key: string;
-  initialValue: string;
+  value: string;
+  resultValue?: string;
+  runOrder?: number;
   type: CellType;
   // eslint-disable-next-line no-unused-vars
 }

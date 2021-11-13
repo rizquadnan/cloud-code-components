@@ -29,14 +29,18 @@ function stateReducer(
 }
 
 export interface MarkdownCellProps {
-  value?: string;
+  initialValue?: string;
   // eslint-disable-next-line no-unused-vars
-  onChange?: (value: string) => void;
+  onChange: (value: string) => void;
   isLoading?: boolean;
 }
 
 const MarkdownCell = (props: MarkdownCellProps) => {
-  const { value: propsValue, onChange: propsOnchange, isLoading } = props;
+  const {
+    initialValue: propsValue,
+    onChange: propsOnchange,
+    isLoading,
+  } = props;
 
   const [state, dispatch] = useReducer(stateReducer, {
     mode: "read",
@@ -75,9 +79,7 @@ const MarkdownCell = (props: MarkdownCellProps) => {
 
     dispatch({ type: "input", payload: value });
 
-    if (propsOnchange) {
-      propsOnchange(value);
-    }
+    propsOnchange(value);
   };
 
   const displaySkeleton = !isLoading;

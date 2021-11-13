@@ -13,6 +13,7 @@ function Codecell(props: CodeCellProps) {
     placeholder,
     result,
     onRunCode,
+    onChange,
   } = props;
   const [code, setCode] = useState(initialValue);
   const { notebookCellLeftPadding } = useTheme();
@@ -34,7 +35,10 @@ function Codecell(props: CodeCellProps) {
           <CodeEditor
             value={code}
             placeholder={placeholder}
-            onValueChange={(value) => setCode(value)}
+            onValueChange={(value) => {
+              onChange(value);
+              setCode(value);
+            }}
             onCtrlEnter={() => onRunCode(code)}
             language={language}
           />
@@ -64,6 +68,7 @@ export interface CodeCellProps {
   // eslint-disable-next-line no-unused-vars
   onRunCode: (value: string) => void;
   // eslint-disable-next-line no-unused-vars
+  onChange: (value: string) => void;
 }
 
 export default Codecell;

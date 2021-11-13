@@ -18,23 +18,25 @@ const Template: ComponentStory<typeof Notebook> = (args) => (
 const cellList: NotebookCell[] = [
   {
     type: "markdown",
-    initialValue: "",
+    value: `## The interactive workflow: input, output, history`,
     key: "0",
   },
   {
     type: "code",
-    initialValue: "",
+    value: `2+10`,
+    resultValue: `12`,
+    runOrder: 1,
     key: "1",
   },
   {
     type: "markdown",
-    initialValue: "",
+    value: "Getting help:",
     key: "2",
   },
 ];
 
 export const Default = Template.bind({});
 Default.args = {
-  language: "go",
+  language: "python",
   cellList,
 };
