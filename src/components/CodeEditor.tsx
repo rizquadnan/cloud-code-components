@@ -18,7 +18,7 @@ const CodeEditor = (props: CodeEditorProps) => {
   const editor = React.useRef(null);
 
   if (!supportedLanguages.includes(language)) {
-    return <div>Language Not Supported</div>;
+    return otherProps.readOnly ? null : <div>Language Not Supported</div>;
   }
 
   return (
@@ -60,7 +60,9 @@ function CodeEditorWrapper(props: CodeEditorProps) {
           borderRadius: "inherit",
         },
         ".code-editor-text-area:focus-visible": {
-          outline: `${blue600} auto 1px !important`,
+          outline: otherProps.readOnly
+            ? "transparent auto 1px !important"
+            : `${blue600} auto 1px !important`,
         },
       }}
       {...otherProps}

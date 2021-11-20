@@ -1,5 +1,6 @@
 import { Flex, Box, Text } from "@chakra-ui/layout";
 import { Skeleton } from "@chakra-ui/skeleton";
+import { useTheme } from "@chakra-ui/system";
 import React, { useState } from "react";
 import CodeEditor from "./CodeEditor";
 
@@ -12,15 +13,17 @@ function Codecell(props: CodeCellProps) {
     placeholder,
     result,
     onRunCode,
+    onChange,
   } = props;
   const [code, setCode] = useState(initialValue);
+  const { notebookCellLeftPadding } = useTheme();
 
   const displayedNumber = number ?? " ";
   const displaySkeleton = !isLoading;
 
   return (
     <Flex>
-      <Box marginRight="4" marginTop="1">
+      <Box marginTop="1" width={notebookCellLeftPadding}>
         <Skeleton isLoaded={displaySkeleton}>
           <Text fontFamily="monospace" color="blue.600">
             In [{displayedNumber}]:{" "}
@@ -32,7 +35,10 @@ function Codecell(props: CodeCellProps) {
           <CodeEditor
             value={code}
             placeholder={placeholder}
-            onValueChange={(value) => setCode(value)}
+            onValueChange={(value) => {
+              onChange(value);
+              setCode(value);
+            }}
             onCtrlEnter={() => onRunCode(code)}
             language={language}
           />
@@ -61,6 +67,8 @@ export interface CodeCellProps {
   result?: string;
   // eslint-disable-next-line no-unused-vars
   onRunCode: (value: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  onChange: (value: string) => void;
 }
 
 export default Codecell;

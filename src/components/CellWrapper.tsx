@@ -3,14 +3,14 @@ import { Box } from "@chakra-ui/layout";
 import { useToken } from "@chakra-ui/system";
 
 function CellWrapper(props: CellWrapperProps) {
-  const { mode = "default", children } = props;
+  const { mode = "default", children, onEnter } = props;
   const [blue600] = useToken("colors", ["blue.600"]);
 
   const commonStyles = {
     border: "1px solid",
     borderRadius: "md",
     padding: "3",
-    paddingLeft: "20",
+    paddingLeft: "10",
   };
 
   const styles = {
@@ -26,11 +26,25 @@ function CellWrapper(props: CellWrapperProps) {
     },
   }[mode];
 
-  return <Box {...styles}>{children}</Box>;
+  return (
+    <Box
+      {...styles}
+      onClick={(e) => {
+        e.stopPropagation();
+
+        if (onEnter) {
+          onEnter();
+        }
+      }}
+    >
+      {children}
+    </Box>
+  );
 }
 
 export interface CellWrapperProps {
   mode?: Mode;
+  onEnter?: () => void;
   children: React.ReactNode;
 }
 

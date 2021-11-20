@@ -2,6 +2,7 @@ import React, { useReducer, useRef } from "react";
 import { Box } from "@chakra-ui/layout";
 import { Skeleton } from "@chakra-ui/skeleton";
 
+import { useTheme } from "@chakra-ui/system";
 import Markdown from "./Markdown";
 import Textarea from "./Textarea";
 
@@ -28,19 +29,25 @@ function stateReducer(
 }
 
 export interface MarkdownCellProps {
-  value?: string;
+  initialValue?: string;
   // eslint-disable-next-line no-unused-vars
-  onChange?: (value: string) => void;
+  onChange: (value: string) => void;
   isLoading?: boolean;
 }
 
 const MarkdownCell = (props: MarkdownCellProps) => {
-  const { value: propsValue, onChange: propsOnchange, isLoading } = props;
+  const {
+    initialValue: propsValue,
+    onChange: propsOnchange,
+    isLoading,
+  } = props;
 
   const [state, dispatch] = useReducer(stateReducer, {
     mode: "read",
     content: propsValue ?? "Double click here to create markdown",
   });
+
+  const { notebookCellLeftPadding } = useTheme();
 
   const ref = useRef<HTMLDivElement>(null);
   const { mode, content } = state;
@@ -72,9 +79,7 @@ const MarkdownCell = (props: MarkdownCellProps) => {
 
     dispatch({ type: "input", payload: value });
 
-    if (propsOnchange) {
-      propsOnchange(value);
-    }
+    propsOnchange(value);
   };
 
   const displaySkeleton = !isLoading;
@@ -88,6 +93,7 @@ const MarkdownCell = (props: MarkdownCellProps) => {
         onKeyPress={onKeyPress}
         role="button"
         tabIndex={0}
+        paddingLeft={notebookCellLeftPadding}
       >
         {mode === "read" ? (
           <Markdown>{content}</Markdown>
