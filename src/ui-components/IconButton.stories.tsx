@@ -28,9 +28,10 @@ Default.args = {
 
 export const AllUsedIcons: ComponentStory<typeof IconButton> = () => (
   <HStack spacing="2">
-    {actionBarIcons.map(({ key, icon }) => (
+    {actionBarIcons.map(({ key, icon, ariaLabel }) => (
       <IconButton
         key={key}
+        aria-label={ariaLabel}
         icon={<Icon as={icon} w={iconSize} h={iconSize} />}
       />
     ))}
