@@ -24,6 +24,7 @@ WrappingCodeCell.args = {
       language="go"
       onRunCode={(value) => console.log("CODE CELL RUN CODE: ", value)}
       placeholder="This is code cell. Type here. Ctrl + Enter to run code"
+      onChange={() => console.log("")}
     />
   ),
 };
@@ -36,7 +37,7 @@ WrappingCodeCellActive.args = {
 
 export const WrappingMarkdownCell = Template.bind({});
 WrappingMarkdownCell.args = {
-  children: <MarkdownCell />,
+  children: <MarkdownCell onChange={() => console.log("")} />,
 };
 
 export const WrappingMarkdownCellActive = Template.bind({});

@@ -20,6 +20,7 @@ const customTheme = extendTheme({
     xxl: "3rem",
   },
   notebookCellLeftPadding: "71px",
+  iconSize: 4,
 });
 
 export default customTheme;
