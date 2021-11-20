@@ -23,14 +23,14 @@ function Codecell(props: CodeCellProps) {
 
   return (
     <Flex>
-      <Box marginTop="1" width={notebookCellLeftPadding}>
+      <Box marginTop="1" width={notebookCellLeftPadding - 17}>
         <Skeleton isLoaded={displaySkeleton}>
           <Text fontFamily="monospace" color="blue.600">
             In [{displayedNumber}]:{" "}
           </Text>
         </Skeleton>
       </Box>
-      <Box flex="1">
+      <Box flex="1" marginLeft={4}>
         <Skeleton isLoaded={displaySkeleton}>
           <CodeEditor
             value={code}

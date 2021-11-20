@@ -31,7 +31,10 @@ function Notebook({
       padding="2rem"
     >
       {cellList.map(
-        ({ key, type, value: propsValue, runOrder, resultValue }, index) => (
+        (
+          { key, type, value: propsValue, runOrder, resultValue, isLoading },
+          index
+        ) => (
           <CellWrapper
             key={key}
             mode={isActiveCellListState[index] ? "active" : "default"}
@@ -49,6 +52,7 @@ function Notebook({
                 language={resolvedLanguage}
                 onChange={(value) => onChange(key, value)}
                 onRunCode={(value) => onRunCodeCell(key, value)}
+                isLoading={isLoading}
               />
             ) : (
               <MarkdownCell
@@ -77,6 +81,7 @@ export interface NotebookCell {
   value: string;
   resultValue?: string;
   runOrder?: number;
+  isLoading?: boolean;
   type: CellType;
   // eslint-disable-next-line no-unused-vars
 }
