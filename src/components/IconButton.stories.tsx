@@ -1,6 +1,13 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { MdSave, MdAdd, MdDelete, MdPlayArrow, MdStop } from "react-icons/md";
+import {
+  MdSave,
+  MdAdd,
+  MdDelete,
+  MdPlayArrow,
+  MdStop,
+  MdFastForward,
+} from "react-icons/md";
 import { HStack } from "@chakra-ui/layout";
 import { Icon } from "@chakra-ui/icons";
 import IconButton from "./IconButton";
@@ -24,7 +31,7 @@ Default.args = {
   icon: <Icon as={MdSave} w={iconSize} h={iconSize} />,
 };
 
-const icons = [MdSave, MdAdd, MdDelete, MdPlayArrow, MdStop];
+const icons = [MdSave, MdAdd, MdDelete, MdPlayArrow, MdStop, MdFastForward];
 
 export const AllUsedIcons: ComponentStory<typeof IconButton> = () => (
   <HStack spacing="2">
