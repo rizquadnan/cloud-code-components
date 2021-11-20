@@ -18,7 +18,7 @@ const CodeEditor = (props: CodeEditorProps) => {
   const editor = React.useRef(null);
 
   if (!supportedLanguages.includes(language)) {
-    return <div>Language Not Supported</div>;
+    return otherProps.readOnly ? null : <div>Language Not Supported</div>;
   }
 
   return (
@@ -43,7 +43,7 @@ const CodeEditor = (props: CodeEditorProps) => {
 };
 
 function CodeEditorWrapper(props: CodeEditorProps) {
-  const { hasBorder = true, readOnly, ...otherProps } = props;
+  const { hasBorder = true, ...otherProps } = props;
   const [blue600] = useToken("colors", ["blue.600"]);
 
   return (
@@ -55,12 +55,12 @@ function CodeEditorWrapper(props: CodeEditorProps) {
       sx={{
         ".code-editor-text-area": {
           border: hasBorder ? "1px solid !important" : "none !important",
-          outline: readOnly ? "none !important" : undefined,
+          outline: otherProps.readOnly ? "none !important" : undefined,
           borderColor: "inherit !important",
           borderRadius: "inherit",
         },
         ".code-editor-text-area:focus-visible": {
-          outline: readOnly
+          outline: otherProps.readOnly
             ? "transparent auto 1px !important"
             : `${blue600} auto 1px !important`,
         },
