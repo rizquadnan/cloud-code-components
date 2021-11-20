@@ -25,7 +25,11 @@ function Notebook({
   };
 
   return (
-    <Box>
+    <Box
+      boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
+      borderRadius="md"
+      padding="2rem"
+    >
       {cellList.map(
         ({ key, type, value: propsValue, runOrder, resultValue }, index) => (
           <CellWrapper

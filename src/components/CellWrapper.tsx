@@ -10,7 +10,7 @@ function CellWrapper(props: CellWrapperProps) {
     border: "1px solid",
     borderRadius: "md",
     padding: "3",
-    paddingLeft: "20",
+    paddingLeft: "10",
   };
 
   const styles = {
