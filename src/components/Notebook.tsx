@@ -12,12 +12,31 @@ function Notebook({
   onChange,
 }: NotebookProps) {
   const resolvedLanguage = language ?? defaultLanguage;
+  const [isActiveCellListState, setIsActiveCellListState] = React.useState(() =>
+    cellList.map(() => false)
+  );
+
+  const onCellWrapperEnter = (index: number) => {
+    const list = isActiveCellListState.map(
+      (_, itemIndex) => itemIndex === index
+    );
+
+    setIsActiveCellListState(list);
+  };
 
   return (
     <Box>
       {cellList.map(
-        ({ key, type, value: propsValue, runOrder, resultValue }) => (
-          <CellWrapper key={key}>
+        ({ key, type, value: propsValue, runOrder, resultValue }, index) => (
+          <CellWrapper
+            key={key}
+            mode={isActiveCellListState[index] ? "active" : "default"}
+            onEnter={() => {
+              if (!isActiveCellListState[index]) {
+                onCellWrapperEnter(index);
+              }
+            }}
+          >
             {type === "code" ? (
               <Codecell
                 initialValue={propsValue}
