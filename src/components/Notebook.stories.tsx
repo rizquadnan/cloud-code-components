@@ -56,6 +56,25 @@ const cellList: NotebookCell[] = [
     runOrder: 2,
     key: "6",
   },
+  {
+    type: "code",
+    value: `prin("Hi")`,
+    resultValue: `---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-1-4c2e160dfadf> in <module>
+----> 1 prin("Hi")
+
+NameError: name 'prin' is not defined`,
+    runOrder: 3,
+    key: "4",
+  },
+  {
+    type: "code",
+    value: `1 + 1`,
+    isLoading: true,
+    runOrder: 3,
+    key: "4",
+  },
 ];
 
 export const Default = Template.bind({});

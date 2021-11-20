@@ -19,7 +19,7 @@ const customTheme = extendTheme({
     xl: "2rem",
     xxl: "3rem",
   },
-  notebookCellLeftPadding: "71px",
+  notebookCellLeftPadding: 75,
   iconSize: 4,
 });
 
