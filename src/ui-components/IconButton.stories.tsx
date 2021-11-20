@@ -1,17 +1,12 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import {
-  MdSave,
-  MdAdd,
-  MdDelete,
-  MdPlayArrow,
-  MdStop,
-  MdFastForward,
-} from "react-icons/md";
 import { HStack } from "@chakra-ui/layout";
 import { Icon } from "@chakra-ui/icons";
+import { MdSave } from "react-icons/md";
 import IconButton from "./IconButton";
 import theme from "../theme";
+
+import actionBarIcons from "../config/ActionBarIcons";
 
 export default {
   title: "IconButton",
@@ -31,13 +26,11 @@ Default.args = {
   icon: <Icon as={MdSave} w={iconSize} h={iconSize} />,
 };
 
-const icons = [MdSave, MdAdd, MdDelete, MdPlayArrow, MdStop, MdFastForward];
-
 export const AllUsedIcons: ComponentStory<typeof IconButton> = () => (
   <HStack spacing="2">
-    {icons.map((icon) => (
+    {actionBarIcons.map(({ key, icon }) => (
       <IconButton
-        key="key"
+        key={key}
         icon={<Icon as={icon} w={iconSize} h={iconSize} />}
       />
     ))}
