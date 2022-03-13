@@ -1,2 +1,2 @@
-# Deployment
-[jupyter-clone-storybook.web.app](https://jupyter-clone-storybook.web.app)
+# About
+Components for Cloud Code. An app that allows coding online. Insipired by Jupyter Notebook
